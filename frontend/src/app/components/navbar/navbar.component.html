@@ -1,9 +1,21 @@
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand">Navbar</a>
-
-  <div>
-    <a class="navbar-brand" routerLink="login">Login</a>
-    <a class="navbar-brand" routerLink="profile">Profile</a>
-  </div>
-  
-</nav>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Laravel + Angular</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>  
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbar">
+        <ul class="na navbar-nav ml-auto">
+          <li class="nav-item active" *ngIf="!loggedIn">
+              <a class="navbar-brand" routerLink="login">Login</a>
+          </li>
+          <li class="nav-item" *ngIf="loggedIn">
+            <a class="navbar-brand" href="#" (click)="logout($event)" >Logout</a>
+          </li>
+          <li class="nav-item" *ngIf="loggedIn">
+              <a class="navbar-brand" routerLink="profile">Profile</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+</header>

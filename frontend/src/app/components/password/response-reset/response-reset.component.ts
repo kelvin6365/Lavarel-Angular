@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { JarwisService } from '../../../Services/jarwis.service';
+import { Router } from '@angular/router';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-response-reset',
@@ -7,7 +11,49 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResponseResetComponent implements OnInit {
 
-  constructor() { }
+  public error=[];
+  public form = {
+    email:null,
+    password:null,
+    password_confirmation:null,
+    resetToken:null
+  }
+  
+  constructor(
+    private route:ActivatedRoute,
+    private Jarwix:JarwisService,
+    private router:Router,
+    private Notify:SnotifyService
+    ) { 
+    route.queryParams.subscribe(params => {
+      this.form.resetToken = params['token']
+    });
+  }
+
+  onSubmit() {
+    this.Jarwix.changePassword(this.form).subscribe(
+      data => this.handleResponse(data),
+      error => this.handleError(error)
+    )
+  }
+
+  handleResponse(data){
+    let _router = this.router;
+    this.Notify.confirm('Done! , Now login with the new password',{
+      buttons:[
+        {text: 'Okey' , action: toster =>{
+          _router.navigateByUrl('/login'),
+          this.Notify.remove(toster.id)
+        }
+      },
+      ]
+    })
+    this.router.navigateByUrl('/login');
+  }
+
+  handleError(error){
+    this.error = error.error.errors;
+  }
 
   ngOnInit() {
   }
