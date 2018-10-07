@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class JarwisService {
 
-  private baseUrl = 'http://localhost:8000/api';
+  private baseUrl = 'http://localhost/La+An/backend/public/api';
   constructor(private http: HttpClient) { }
 
   signup (data) {
