@@ -1,4 +1,4 @@
-# Lavarel-Angular
+# Lavarel5.7 + Angular  (JWT-Auth)
 <br>
 Demo : http://laravel-angular.dreamplugs.com/
 <br>
